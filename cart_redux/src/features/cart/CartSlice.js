@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchItems, updateItem, deleteItem, addItem } from "./CartAPI";
+import { fetchItemsAPI, updateItemAPI, deleteItemAPI, addItemAPI } from "./CartAPI";
 
 const initialState = {
   items: [],
@@ -9,7 +9,7 @@ const initialState = {
 export const fetchItemsAsync = createAsyncThunk(
   "cart/fetchItems",
   async () => {
-    const response = await fetchItems();
+    const response = await fetchItemsAPI();
     return response.data;
   }
 );
@@ -18,8 +18,16 @@ export const AddItemAsync = createAsyncThunk(
   "cart/AddItem",
   async (item) => {
     const {id,title,brand,thumbnail,price} = item;
-    const response = await addItem({id,title,brand,thumbnail,price,quantity:1});
+    const response = await addItemAPI({id,title,brand,thumbnail,price,quantity:1});
     return response.data;
+  }
+);
+
+export const deleteItemAsync = createAsyncThunk(
+  "cart/deleteItem",
+  async (id) => {
+    await deleteItemAPI(id);
+    return id;
   }
 );
 
@@ -29,6 +37,7 @@ export const cartSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+    // Fetch Items
       .addCase(fetchItemsAsync.pending, (state) => {
         state.status = "loading";
       })
@@ -36,12 +45,22 @@ export const cartSlice = createSlice({
         state.status = "idle";
         state.items = action.payload;
       })
+    // Add Item
       .addCase(AddItemAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(AddItemAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.items.push(action.payload);
+      })
+    // Delete Item
+      .addCase(deleteItemAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(deleteItemAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        const index = state.items.findIndex((item)=>item.id===action.payload)
+        state.items.splice(index,1);
       });
   },
 });

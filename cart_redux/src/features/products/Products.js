@@ -8,19 +8,22 @@ export function Products() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
 
-  useEffect(()=>{
-    dispatch(fetchProductsAsync())
-  },[])
-  
+  useEffect(() => {
+    dispatch(fetchProductsAsync());
+  }, []);
+
   return (
     <div>
-      
       <div className="grid grid-cols-4 ">
         {products &&
           products.map((product) => (
             // <div className="mt-4">
             <div className="card">
-              <img src={product.thumbnail} alt={product.title} width={"300px"}/>
+              <img
+                src={product.thumbnail}
+                alt={product.title}
+                width={"300px"}
+              />
               <h1>{product.title}</h1>
               <p className="price">$ {product.price}</p>
               <p>{product.rating}</p>

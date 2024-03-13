@@ -571,14 +571,6 @@
       "quantity": 1
     },
     {
-      "id": "1",
-      "title": "iPhone 9",
-      "brand": "Apple",
-      "thumbnail": "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
-      "price": 549,
-      "quantity": 1
-    },
-    {
       "id": "2",
       "title": "iPhone X",
       "brand": "Apple",
