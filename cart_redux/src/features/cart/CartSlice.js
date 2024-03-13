@@ -31,6 +31,22 @@ export const deleteItemAsync = createAsyncThunk(
   }
 );
 
+export const updateItemAsync = createAsyncThunk(
+  'cart/updateItem',
+  async ({item,change})=>{
+    const {id} = item
+    // console.log(id)
+    // console.log(change)
+    const response = await updateItemAPI(id, change);
+    const data = response.data
+    // console.log(data)
+    // console.log(item)
+    const newItem = {...item, ...data};
+    // console.log(newItem)
+    return newItem;
+  }
+)
+
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -61,6 +77,17 @@ export const cartSlice = createSlice({
         state.status = "idle";
         const index = state.items.findIndex((item)=>item.id===action.payload)
         state.items.splice(index,1);
+      })
+      // Update Item
+      .addCase(updateItemAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(updateItemAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        console.log(action.payload)
+        const index = state.items.findIndex((item)=>item.id===action.payload.id)
+        console.log(index)
+        state.items.splice(index,1,action.payload);
       });
   },
 });

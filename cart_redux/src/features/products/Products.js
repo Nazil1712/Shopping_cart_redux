@@ -14,7 +14,7 @@ export function Products() {
 
   return (
     <div>
-      <div className="grid grid-cols-4 ">
+      <div className="container">
         {products &&
           products.map((product) => (
             // <div className="mt-4">

@@ -10,6 +10,7 @@ export function addItemAPI(item) {
 }
 
 export function updateItemAPI(id,itemUpdate) {
+  // console.log(id,itemUpdate)
   return axios.put(`http://localhost:8080/cart/${id}`,itemUpdate)
 }
 

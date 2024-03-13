@@ -555,27 +555,15 @@
   ],
   "cart": [
     {
-      "id": "1",
-      "title": "iPhone 9",
-      "brand": "Apple",
-      "thumbnail": "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
-      "price": 549,
-      "quantity": 1
+      "quantity": 3,
+      "id": "2"
     },
     {
-      "id": "1",
-      "title": "iPhone 9",
-      "brand": "Apple",
-      "thumbnail": "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
-      "price": 549,
-      "quantity": 1
-    },
-    {
-      "id": "2",
-      "title": "iPhone X",
-      "brand": "Apple",
-      "thumbnail": "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg",
-      "price": 899,
+      "id": "3",
+      "title": "Samsung Universe 9",
+      "brand": "Samsung",
+      "thumbnail": "https://cdn.dummyjson.com/product-images/3/thumbnail.jpg",
+      "price": 1249,
       "quantity": 1
     }
   ]
