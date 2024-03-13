@@ -8,7 +8,7 @@ const initialState = {
 
 export const fetchProductsAsync = createAsyncThunk(
   'products/fetchProducts',
-  async (amount) => {
+  async () => {
     const response = await fetchProducts()
     return response.data;
   }
@@ -26,7 +26,7 @@ export const productsSlice = createSlice({
       })
       .addCase(fetchProductsAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.value += action.payload;
+        state.products = action.payload;
       });
   },
 });
