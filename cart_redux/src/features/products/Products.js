@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProductsAsync } from "./ProductsSlice";
 import "../../App.css";
+import { AddItemAsync } from "../cart/CartSlice";
 
 export function Products() {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ export function Products() {
                 <p className="price">$ {product.price}</p>
                 <p>{product.rating}</p>
                 <p>
-                  <button>Add to Cart</button>
+                  <button onClick={()=>dispatch(AddItemAsync(product))}>Add to Cart</button>
                 </p>
               </div>
             </div>
