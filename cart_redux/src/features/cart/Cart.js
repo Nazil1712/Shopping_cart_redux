@@ -1,20 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchProductsAsync } from "./ProductsSlice";
 import "./Cart.css";
+import { fetchItemsAsync } from "./CartSlice";
 
-export function Products() {
+export function Cart() {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.cart.items);
 
+  useEffect(()=>{
+    dispatch(fetchItemsAsync())
+  },[])
+
   return (
     <div>
-      <button
-        onClick={() => dispatch(fetchProductsAsync())}
-        className="border-red-400 border hover:bg-slate-400"
-      >
-        Fetch Products
-      </button>
       {items &&
         items.map((item) => (
           <div className="cart-item">
@@ -26,17 +24,14 @@ export function Products() {
             </div>
             <div className="quantity">
               Quantity
-              <select
-                value={item.quantity}
-                onChange={(e) => handleChange(e, item.id)}
-              >
+              <select value={item.quantity}>
                 <option value={1}>1</option>
                 <option value={2}>2</option>
                 <option value={3}>3</option>
               </select>
             </div>
             <div className="close">
-              <button onClick={() => dispatch(deleteAsync(item.id))}>X</button>
+              <button>X</button>
             </div>
           </div>
         ))}
